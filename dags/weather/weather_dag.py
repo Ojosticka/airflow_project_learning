@@ -34,4 +34,3 @@ load_data = PythonOperator(
 
 # Define task dependencies
 fetch_weather >> process_weather >> load_data
-
