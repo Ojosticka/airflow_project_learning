@@ -13,7 +13,7 @@ api_url = Variable.get("api_url")
 with DAG(
     dag_id="rocket_images",
     start_date=datetime(2025, 10, 28),
-    schedule="@daily",
+    schedule="0 8 * * *",
     catchup=False
 ):
 
@@ -35,12 +35,6 @@ with DAG(
         task_id="get_image_count",
         python_callable=_get_image_count
     )
-
-
-    # notify = BashOperator(
-    #     task_id="notify",
-    #     bash_command='echo "There are now $(ls /opt/airflow/dags/rockets/images/ | wc -l) images"'
-    # )
 
     send_notification = EmailOperator(
         task_id="send_notification",
